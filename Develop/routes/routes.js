@@ -49,7 +49,7 @@ module.exports = app => {
     }
     });
 
-    // GET request to retrive a note with a specific ID
+    // GET request to retrieve a note with a specific ID
     app.get('/api/notes/:id', (req, res) => {
         res.json(notes[req.params.id]);
         console.log(res)
