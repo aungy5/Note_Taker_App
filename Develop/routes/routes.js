@@ -1,9 +1,10 @@
 const fs = require("fs");
 const path = require("path");
 const uuid = require('/Users/andrew/Note_Taker_App/Develop/public/assets/helpers/uuid.js');
+const db = require("/Users/andrew/Note_Taker_App/Develop/db/db.json")
 
 module.exports = app => {
-    //setting up a notes variable for easy access
+    
     fs.readFile('db/db.json', 'utf8', (err, data) => {
         if (err) throw err;
         var notes = JSON.parse(data);
@@ -12,7 +13,7 @@ module.exports = app => {
     //GET /api/notes should read the db.json file and return all saved notes as JSON.
     app.get('/api/notes', (req, res) => {
         res.json(notes);
-        console.log(`${req.method} request recieved`);
+        console.log(`${req.method} request received`);
     });
 
     app.post('/api/notes', (req, res) => {
@@ -33,7 +34,7 @@ module.exports = app => {
               notes.push(addNote)
               fs.writeFile('/Users/andrew/Note_Taker_App/Develop/db/db.json', JSON.stringify(notes), (writeErr) => {
                   writeErr ? console.err(writeErr)
-                  : console.info('Successfully updated reviews!')
+                  : console.info(`Successfully added your note with ID = ${addNote.id}`)
               })
           }
       });
@@ -49,13 +50,7 @@ module.exports = app => {
     }
     });
 
-    // GET request to retrieve a note with a specific ID
-    app.get('/api/notes/:id', (req, res) => {
-        res.json(notes[req.params.id]);
-        console.log(res)
-    })
-
-    // DELETE request to delete /* · */a note with a specific ID
+    // DELETE request to delete a note with a specific ID
     app.delete('/api/notes/:id', (req, res) => {
         console.info(`${req.method} request received to delete a note!`);
         console.log(req.body)
@@ -71,10 +66,17 @@ module.exports = app => {
           if (err) {
               console.log(err);
           } else {
-              notes.splice(deleteNote.id, 1)
+            for (let i = 0; i < notes.length; i++) {
+
+                if (notes[i].id == req.params.id) {
+                    notes.splice(i, 1);
+                    break;
+                }
+            }
+              
               fs.writeFile('/Users/andrew/Note_Taker_App/Develop/db/db.json', JSON.stringify(notes), (writeErr) => {
                   writeErr ? console.err(writeErr)
-                  : console.info(`Successfully deleted note with ID = ${deleteNote.id}`)
+                  : console.info(`Successfully deleted note with ID = ${req.params.id}`)
               })
           }
       });

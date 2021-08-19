@@ -1,3 +1,7 @@
+//const fs = require("fs");
+//const path = require("path");
+//const uuid = require('/Users/andrew/Note_Taker_App/Develop/public/assets/helpers/uuid.js');
+
 let noteTitle;
 let noteText;
 let saveNoteBtn;
@@ -50,10 +54,19 @@ const deleteNote = (id) =>
     },
   });
 
+  //const pullActiveNote = (id) =>
+  //fetch(`/api/notes/${id}`, {
+    //method: 'GET',
+    //headers: {
+      //'Content-Type': 'application/json',
+    //},
+  //});
+
 const renderActiveNote = () => {
   hide(saveNoteBtn);
-
-  if (typeof activeNote.id != "") {
+  console.log(activeNote)
+  console.log(activeNote.id)
+  if (activeNote.id) {
     noteTitle.setAttribute('readonly', true);
     noteText.setAttribute('readonly', true);
     noteTitle.value = activeNote.title;
@@ -70,7 +83,7 @@ const handleNoteSave = () => {
   const newNote = {
     title: noteTitle.value,
     text: noteText.value,
-    //id: noteId.value,
+    //id: uuid(),
   };
   saveNote(newNote).then(() => {
     getAndRenderNotes();
@@ -85,8 +98,10 @@ const handleNoteDelete = (e) => {
 
   const note = e.target;
   const noteId = JSON.parse(note.parentElement.getAttribute('data-note')).id;
+  console.log(noteId)
 
-  if (activeNote.id === noteId) {
+  if (activeNote.id === noteId) 
+  {
     activeNote = {};
   }
 
