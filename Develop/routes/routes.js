@@ -59,8 +59,9 @@ module.exports = app => {
     app.delete('/api/notes/:id', (req, res) => {
         console.info(`${req.method} request received to delete a note!`);
         console.log(req.body)
+        const { title, text, id } = req.body;
 
-        if (typeof req.params.id === "number") {
+        if (typeof req.params.id != "") {
         const deleteNote = {
         title,
         text,
@@ -70,7 +71,7 @@ module.exports = app => {
           if (err) {
               console.log(err);
           } else {
-              notes.splice(deleteNote)
+              notes.splice(deleteNote.id, 1)
               fs.writeFile('/Users/andrew/Note_Taker_App/Develop/db/db.json', JSON.stringify(notes), (writeErr) => {
                   writeErr ? console.err(writeErr)
                   : console.info(`Successfully deleted note with ID = ${deleteNote.id}`)
@@ -88,7 +89,6 @@ module.exports = app => {
         res.json('Error deleting note :(')
     }
     });
-    
     
 
     // VIEW ROUTES
