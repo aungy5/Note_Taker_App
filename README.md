@@ -1,6 +1,8 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
   # Notes App
+  Link to deployed application ==> https://radiant-hollows-63802.herokuapp.com/
+  Link to github repository ==> 
   ## Table of Contents
 - [Description](#description)
 
@@ -22,6 +24,7 @@
   If someone would like to build on this project, they will need to clone the repository and then make sure that they run an npm install on the project repository, and then make sure they install the inquirer package. The beautiful thing about Heroku is that end users do not need to install anything, they can simply access the deployed application link at the top of this readME to access the application, and it will work for them in the browser regardless of whether they have npm installed.  
   ## Usage
   using this app is pretty self explanatory given the UI, however I have added a video below that shows the user how to interact with this page.
+  Link to video ==> https://drive.google.com/file/d/1R9tHdCiWLRHq23rXGd9f49v3WJ7aU1JM/view?usp=sharing
   ## Contributors
   No additional contributors for this project. 
   ## Testing
