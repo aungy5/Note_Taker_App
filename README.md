@@ -2,7 +2,8 @@
 
   # Notes App
   Link to deployed application ==> https://radiant-hollows-63802.herokuapp.com/
-  Link to github repository ==> 
+  
+  Link to github repository ==> https://github.com/aungy5/Note_Taker_App
   ## Table of Contents
 - [Description](#description)
 
