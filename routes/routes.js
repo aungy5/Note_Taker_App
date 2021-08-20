@@ -1,11 +1,11 @@
 const fs = require("fs");
 const path = require("path");
-const uuid = require('/Users/andrew/Note_Taker_App/Develop/public/assets/helpers/uuid.js');
-const db = require("/Users/andrew/Note_Taker_App/Develop/db/db.json")
+const uuid = require("../db/helpers/uuid");
+const db = require("../db/db.json")
 
 module.exports = app => {
     
-    fs.readFile('db/db.json', 'utf8', (err, data) => {
+    fs.readFile(db, 'utf8', (err, data) => {
         if (err) throw err;
         var notes = JSON.parse(data);
         console.log(notes);
@@ -27,12 +27,12 @@ module.exports = app => {
         text,
         id: uuid(),
       };
-      fs.readFile('/Users/andrew/Note_Taker_App/Develop/db/db.json', 'utf8', (err, data) => {
+      fs.readFile(db, 'utf8', (err, data) => {
           if (err) {
               console.log(err);
           } else {
               notes.push(addNote)
-              fs.writeFile('/Users/andrew/Note_Taker_App/Develop/db/db.json', JSON.stringify(notes), (writeErr) => {
+              fs.writeFile('../db/db.json', JSON.stringify(notes), (writeErr) => {
                   writeErr ? console.err(writeErr)
                   : console.info(`Successfully added your note with ID = ${addNote.id}`)
               })
@@ -62,7 +62,7 @@ module.exports = app => {
         text,
         id,
       };
-      fs.readFile('/Users/andrew/Note_Taker_App/Develop/db/db.json', 'utf8', (err, data) => {
+      fs.readFile(db, 'utf8', (err, data) => {
           if (err) {
               console.log(err);
           } else {
@@ -74,7 +74,7 @@ module.exports = app => {
                 }
             }
               
-              fs.writeFile('/Users/andrew/Note_Taker_App/Develop/db/db.json', JSON.stringify(notes), (writeErr) => {
+              fs.writeFile(db, JSON.stringify(notes), (writeErr) => {
                   writeErr ? console.err(writeErr)
                   : console.info(`Successfully deleted note with ID = ${req.params.id}`)
               })
